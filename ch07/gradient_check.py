@@ -2,7 +2,7 @@
 import numpy as np
 from simple_convnet import SimpleConvNet
 
-network = SimpleConvNet(input_dim=(1,10, 10), 
+network = SimpleConvNet(input_dim=(1,10, 10),
                         conv_param = {'filter_num':10, 'filter_size':3, 'pad':0, 'stride':1},
                         hidden_size=10, output_size=10, weight_init_std=0.01)
 
