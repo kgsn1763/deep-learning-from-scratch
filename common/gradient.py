@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+
 import numpy as np
 
 def _numerical_gradient_1d(f, x):

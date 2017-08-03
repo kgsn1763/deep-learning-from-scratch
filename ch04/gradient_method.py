@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+
 import numpy as np
 import matplotlib.pylab as plt
 from gradient_2d import numerical_gradient
