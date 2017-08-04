@@ -5,8 +5,7 @@ import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 import pickle
 import numpy as np
-from collections import OrderedDict
-from common.layers import *
+from common.layers import Convolution, Relu, Pooling, Affine, Dropout, SoftmaxWithLoss
 
 
 class DeepConvNet:
@@ -19,12 +18,12 @@ class DeepConvNet:
         affine - relu - dropout - affine - dropout - softmax
     """
     def __init__(self, input_dim=(1, 28, 28),
-                 conv_param_1 = {'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_2 = {'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_3 = {'filter_num':32, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_4 = {'filter_num':32, 'filter_size':3, 'pad':2, 'stride':1},
-                 conv_param_5 = {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_6 = {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
+                 conv_param_1={'filter_num': 16, 'filter_size': 3, 'pad': 1, 'stride': 1},
+                 conv_param_2={'filter_num': 16, 'filter_size': 3, 'pad': 1, 'stride': 1},
+                 conv_param_3={'filter_num': 32, 'filter_size': 3, 'pad': 1, 'stride': 1},
+                 conv_param_4={'filter_num': 32, 'filter_size': 3, 'pad': 2, 'stride': 1},
+                 conv_param_5={'filter_num': 64, 'filter_size': 3, 'pad': 1, 'stride': 1},
+                 conv_param_6={'filter_num': 64, 'filter_size': 3, 'pad': 1, 'stride': 1},
                  hidden_size=50, output_size=10):
         # 重みの初期化===========
         # 各層のニューロンひとつあたりが、前層のニューロンといくつのつながりがあるか（TODO:自動で計算する）
@@ -86,7 +85,8 @@ class DeepConvNet:
         return self.last_layer.forward(y, t)
 
     def accuracy(self, x, t, batch_size=100):
-        if t.ndim != 1 : t = np.argmax(t, axis=1)
+        if t.ndim != 1:
+            t = np.argmax(t, axis=1)
 
         acc = 0.0
 

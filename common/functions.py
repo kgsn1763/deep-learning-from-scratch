@@ -26,7 +26,7 @@ def relu(x):
 
 def relu_grad(x):
     grad = np.zeros(x)
-    grad[x>=0] = 1
+    grad[x >= 0] = 1
     return grad
 
 
@@ -37,7 +37,7 @@ def softmax(x):
         y = np.exp(x) / np.sum(np.exp(x), axis=0)
         return y.T
 
-    x = x - np.max(x) # オーバーフロー対策
+    x = x - np.max(x)  # オーバーフロー対策
     return np.exp(x) / np.sum(np.exp(x))
 
 

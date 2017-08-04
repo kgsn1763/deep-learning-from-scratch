@@ -6,7 +6,7 @@ sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポ�
 import pickle
 import numpy as np
 from collections import OrderedDict
-from common.layers import *
+from common.layers import Convolution, Relu, Pooling, Affine, SoftmaxWithLoss
 from common.gradient import numerical_gradient
 
 
@@ -26,7 +26,7 @@ class SimpleConvNet:
         'sigmoid'または'xavier'を指定した場合は「Xavierの初期値」を設定
     """
     def __init__(self, input_dim=(1, 28, 28),
-                 conv_param={'filter_num':30, 'filter_size':5, 'pad':0, 'stride':1},
+                 conv_param={'filter_num': 30, 'filter_size': 5, 'pad': 0, 'stride': 1},
                  hidden_size=100, output_size=10, weight_init_std=0.01):
         filter_num = conv_param['filter_num']
         filter_size = conv_param['filter_size']
@@ -39,13 +39,13 @@ class SimpleConvNet:
         # 重みの初期化
         self.params = {}
         self.params['W1'] = weight_init_std * \
-                            np.random.randn(filter_num, input_dim[0], filter_size, filter_size)
+            np.random.randn(filter_num, input_dim[0], filter_size, filter_size)
         self.params['b1'] = np.zeros(filter_num)
         self.params['W2'] = weight_init_std * \
-                            np.random.randn(pool_output_size, hidden_size)
+            np.random.randn(pool_output_size, hidden_size)
         self.params['b2'] = np.zeros(hidden_size)
         self.params['W3'] = weight_init_std * \
-                            np.random.randn(hidden_size, output_size)
+            np.random.randn(hidden_size, output_size)
         self.params['b3'] = np.zeros(output_size)
 
         # レイヤの生成
@@ -74,7 +74,8 @@ class SimpleConvNet:
         return self.last_layer.forward(y, t)
 
     def accuracy(self, x, t, batch_size=100):
-        if t.ndim != 1 : t = np.argmax(t, axis=1)
+        if t.ndim != 1:
+            t = np.argmax(t, axis=1)
 
         acc = 0.0
 

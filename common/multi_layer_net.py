@@ -5,7 +5,7 @@ import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 import numpy as np
 from collections import OrderedDict
-from common.layers import *
+from common.layers import Sigmoid, Relu, Affine, SoftmaxWithLoss
 from common.gradient import numerical_gradient
 
 
@@ -99,7 +99,8 @@ class MultiLayerNet:
     def accuracy(self, x, t):
         y = self.predict(x)
         y = np.argmax(y, axis=1)
-        if t.ndim != 1 : t = np.argmax(t, axis=1)
+        if t.ndim != 1:
+            t = np.argmax(t, axis=1)
 
         accuracy = np.sum(y == t) / float(x.shape[0])
         return accuracy

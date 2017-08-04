@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 class Man:
     """サンプルクラス"""
 
@@ -13,6 +14,7 @@ class Man:
 
     def goodbye(self):
         print("Good-bye " + self.name + "!")
+
 
 m = Man("David")
 m.hello()

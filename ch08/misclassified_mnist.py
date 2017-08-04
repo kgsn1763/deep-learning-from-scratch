@@ -15,9 +15,9 @@ network = DeepConvNet()
 network.load_params("deep_convnet_params.pkl")
 
 print("calculating test accuracy ... ")
-#sampled = 1000
-#x_test = x_test[:sampled]
-#t_test = t_test[:sampled]
+# sampled = 1000
+# x_test = x_test[:sampled]
+# t_test = t_test[:sampled]
 
 classified_ids = []
 

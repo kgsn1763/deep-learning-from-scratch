@@ -2,11 +2,12 @@
 # coding: utf-8
 
 import sys, os
-sys.path.append(os.pardir) # 親ディレクトリのファイルをインポートするための設定
+sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 import numpy as np
 from collections import OrderedDict
-from common.layers import *
+from common.layers import Sigmoid, Relu, Affine, BatchNormalization, Dropout, SoftmaxWithLoss
 from common.gradient import numerical_gradient
+
 
 class MultiLayerNetExtend:
     """拡張版の全結合による多層ニューラルネットワーク
@@ -29,7 +30,7 @@ class MultiLayerNetExtend:
     """
     def __init__(self, input_size, hidden_size_list, output_size,
                  activation='relu', weight_init_std='relu', weight_decay_lambda=0,
-                 use_dropout = False, dropout_ration = 0.5, use_batchnorm=False):
+                 use_dropout=False, dropout_ration=0.5, use_batchnorm=False):
         self.input_size = input_size
         self.output_size = output_size
         self.hidden_size_list = hidden_size_list
@@ -107,7 +108,8 @@ class MultiLayerNetExtend:
     def accuracy(self, X, T):
         Y = self.predict(X, train_flg=False)
         Y = np.argmax(Y, axis=1)
-        if T.ndim != 1 : T = np.argmax(T, axis=1)
+        if T.ndim != 1:
+            T = np.argmax(T, axis=1)
 
         accuracy = np.sum(Y == T) / float(X.shape[0])
         return accuracy

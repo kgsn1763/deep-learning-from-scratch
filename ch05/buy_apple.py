@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from layer_naive import *
+from layer_naive import MulLayer
 
 
 apple = 100

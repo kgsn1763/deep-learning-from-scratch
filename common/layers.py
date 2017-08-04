@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import numpy as np
-from common.functions import *
+from common.functions import sigmoid, softmax, cross_entropy_error
 from common.util import im2col, col2im
 
 
@@ -41,7 +41,7 @@ class Sigmoid:
 
 class Affine:
     def __init__(self, W, b):
-        self.W =W
+        self.W = W
         self.b = b
 
         self.x = None
@@ -72,8 +72,8 @@ class Affine:
 class SoftmaxWithLoss:
     def __init__(self):
         self.loss = None
-        self.y = None # softmaxの出力
-        self.t = None # 教師データ
+        self.y = None  # softmaxの出力
+        self.t = None  # 教師データ
 
     def forward(self, x, t):
         self.t = t
@@ -84,7 +84,7 @@ class SoftmaxWithLoss:
 
     def backward(self, dout=1):
         batch_size = self.t.shape[0]
-        if self.t.size == self.y.size: # 教師データがone-hot-vectorの場合
+        if self.t.size == self.y.size:  # 教師データがone-hot-vectorの場合
             dx = (self.y - self.t) / batch_size
         else:
             dx = self.y.copy()
@@ -121,7 +121,7 @@ class BatchNormalization:
         self.gamma = gamma
         self.beta = beta
         self.momentum = momentum
-        self.input_shape = None # Conv層の場合は4次元、全結合層の場合は2次元
+        self.input_shape = None  # Conv層の場合は4次元、全結合層の場合は2次元
 
         # テスト時に使用する平均と分散
         self.running_mean = running_mean
@@ -233,7 +233,7 @@ class Convolution:
 
     def backward(self, dout):
         FN, C, FH, FW = self.W.shape
-        dout = dout.transpose(0,2,3,1).reshape(-1, FN)
+        dout = dout.transpose(0, 2, 3, 1).reshape(-1, FN)
 
         self.db = np.sum(dout, axis=0)
         self.dW = np.dot(self.col.T, dout)

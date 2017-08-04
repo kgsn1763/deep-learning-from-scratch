@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from dataset.mnist import load_mnist
 from common.multi_layer_net_extend import MultiLayerNetExtend
-from common.optimizer import SGD, Adam
+from common.optimizer import SGD
 
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
 
@@ -63,14 +63,14 @@ weight_scale_list = np.logspace(0, -4, num=16)
 x = np.arange(max_epochs)
 
 for i, w in enumerate(weight_scale_list):
-    print( "============== " + str(i+1) + "/16" + " ==============")
+    print("============== " + str(i+1) + "/16" + " ==============")
     train_acc_list, bn_train_acc_list = __train(w)
 
-    plt.subplot(4,4,i+1)
+    plt.subplot(4, 4, i+1)
     plt.title("W:" + str(w))
     if i == 15:
         plt.plot(x, bn_train_acc_list, label='Batch Normalization', markevery=2)
-        plt.plot(x, train_acc_list, linestyle = "--", label='Normal(without BatchNorm)', markevery=2)
+        plt.plot(x, train_acc_list, linestyle="--", label='Normal(without BatchNorm)', markevery=2)
     else:
         plt.plot(x, bn_train_acc_list, markevery=2)
         plt.plot(x, train_acc_list, linestyle="--", markevery=2)

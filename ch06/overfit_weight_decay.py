@@ -18,7 +18,7 @@ x_train = x_train[:300]
 t_train = t_train[:300]
 
 # weight decay（荷重減衰）の設定 =======================
-#weight_decay_lambda = 0 # weight decayを使用しない場合
+# weight_decay_lambda = 0 # weight decayを使用しない場合
 weight_decay_lambda = 0.1
 # ====================================================
 

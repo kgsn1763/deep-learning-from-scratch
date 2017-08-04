@@ -3,7 +3,8 @@
 
 import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
-from common.functions import *
+import numpy as np
+from common.functions import sigmoid, softmax, cross_entropy_error, sigmoid_grad
 from common.gradient import numerical_gradient
 
 

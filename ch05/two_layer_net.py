@@ -4,14 +4,14 @@
 import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 import numpy as np
-from common.layers import *
+from common.layers import Affine, Relu, SoftmaxWithLoss
 from common.gradient import numerical_gradient
 from collections import OrderedDict
 
 
 class TwoLayerNet:
 
-    def __init__(self, input_size, hidden_size, output_size, weight_init_std = 0.01):
+    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
         # 重みの初期化
         self.params = {}
         self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
@@ -41,7 +41,8 @@ class TwoLayerNet:
     def accuracy(self, x, t):
         y = self.predict(x)
         y = np.argmax(y, axis=1)
-        if t.ndim != 1 : t = np.argmax(t, axis=1)
+        if t.ndim != 1:
+            t = np.argmax(t, axis=1)
 
         accuracy = np.sum(y == t) / float(x.shape[0])
         return accuracy

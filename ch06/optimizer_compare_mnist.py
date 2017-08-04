@@ -4,11 +4,12 @@
 import os
 import sys
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
+import numpy as np
 import matplotlib.pyplot as plt
 from dataset.mnist import load_mnist
 from common.util import smooth_curve
 from common.multi_layer_net import MultiLayerNet
-from common.optimizer import *
+from common.optimizer import SGD, Momentum, AdaGrad, Adam
 
 
 # 0:MNISTデータの読み込み==========
@@ -25,7 +26,7 @@ optimizers['SGD'] = SGD()
 optimizers['Momentum'] = Momentum()
 optimizers['AdaGrad'] = AdaGrad()
 optimizers['Adam'] = Adam()
-#optimizers['RMSprop'] = RMSprop()
+# optimizers['RMSprop'] = RMSprop()
 
 networks = {}
 train_loss = {}
@@ -50,7 +51,7 @@ for i in range(max_iterations):
         train_loss[key].append(loss)
 
     if i % 100 == 0:
-        print( "===========" + "iteration:" + str(i) + "===========")
+        print("===========" + "iteration:" + str(i) + "===========")
         for key in optimizers.keys():
             loss = networks[key].loss(x_batch, t_batch)
             print(key + ":" + str(loss))
