@@ -11,7 +11,7 @@ from dataset.mnist import load_mnist
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=False)
 
 network = DeepConvNet()
-network.load_params("deep_convnet_params.pkl")
+network.load_params(os.path.dirname(os.path.abspath(__file__)) + "/deep_convnet_params.pkl")
 
 sampled = 10000  # 高速化のため
 x_test = x_test[:sampled]

@@ -17,5 +17,5 @@ trainer = Trainer(network, x_train, t_train, x_test, t_test,
 trainer.train()
 
 # パラメータの保存
-network.save_params("deep_convnet_params.pkl")
+network.save_params(os.path.dirname(os.path.abspath(__file__)) + "/deep_convnet_params.pkl")
 print("Saved Network Parameters!")

@@ -28,7 +28,7 @@ network = SimpleConvNet(input_dim=(1, 28, 28),
                         hidden_size=100, output_size=10, weight_init_std=0.01)
 
 # 学習後の重み
-network.load_params("params.pkl")
+network.load_params(os.path.dirname(os.path.abspath(__file__)) + "/params.pkl")
 
 filter_show(network.params['W1'], 16)
 
